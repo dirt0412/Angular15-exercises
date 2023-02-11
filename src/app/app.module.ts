@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+//import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -19,10 +19,32 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'cars/create',
+    providers: [{ provide: CARS_SECRET, useValue: 'xyz' }, CarsService],
+    loadComponent: () =>
+      import('./cars/cars.component').then(
+        ({ CarsComponent }) => CarsComponent
+      ),
+  },
+  {
     path: 'tanks',
     loadComponent: () =>
       import('./tanks/tanks.component').then(
         ({ TanksComponent }) => TanksComponent
+      ),
+  },
+  {
+    path: 'tanks/create',
+    loadComponent: () =>
+      import('./tanks/tanks.component').then(
+        ({ TanksComponent }) => TanksComponent
+      ),
+  },
+  {
+    path: 'user/create',
+    loadComponent: () =>
+      import('./user/user.component').then(
+        ({ UserComponent }) => UserComponent
       ),
   },
 ];
@@ -31,7 +53,7 @@ const routes: Routes = [
   imports: 
   [
     BrowserModule, 
-    FormsModule, 
+    //FormsModule, 
     HttpClientModule, //To use HttpClient, We have to first import HttpClientModule in the Angular application module
     RouterModule.forRoot(routes)
   ],
